@@ -2,6 +2,7 @@
    padding: 0px;
    margin: 0px;
    box-sizing: border-box;
+   
 }
 .contact{
    background-color: rgb(39, 134, 243);
@@ -58,10 +59,12 @@
 .logo{
    display: inline-block;
    padding: 2px;
+   
 }
 .logo img{
    display: inline-block;
    width: 95px;
+   
 }
 .webName {
    display: inline-block;
@@ -131,7 +134,7 @@
    font-weight: bold;
    border-bottom:double;
    border-bottom-width:5px ;
-   pading:7px;
+   padding:7px;
 }
 .menu .fa{
    margin-right: 5px;
@@ -169,45 +172,29 @@
    border-bottom-style: none;
 }
 
-.text-container {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   width: 100%;
-   text-align: center;
+body{
+   
 }
 
-.mission, .vision, .motto {
-   color: white;
-   font-size: 20px;
-   padding: 10px;
-}
-
-.mission {
-   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.vision {
-   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.motto {
-   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.img-slider{
-   position: relative;
-   width: 1300px;
+.img-slider {
+   position: relative; 
+   width: 99%;
    height: 1000px;
    margin: 10px;
-   backgound: #1d212b;
+   background: #eeeef0;
 }
 
 .img-slider .slide{
    z-index: 1;
    position: absolute;
    width: 100%;
+   clip-path: circle(0% at 0 50%);
+}
+
+.img-slider .slide .active{
+   clip-path: circle(150% at 0 50%);
+   transition: 3s;
+   transition-property: clip-patch;
 }
 
 .img-slider .slide img{
@@ -218,26 +205,48 @@
 
 .img-slider .slide .info{
    position: absolute;
-   top: 0;
+   top: 35%;
    padding: 15px 30px;
+   text-align: center;
+   
 }
 
 .img-slider .slide .info h2{
    color:#fff;
-   font-size: 45px;
-   text-transform: uppercase;
-   font-weight: 800px;
-   letter-spacing: 2px;
+   font-size: 60px;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   text-transform: capitalize;
+   font-weight: bolder;
+   letter-spacing: 3px;
+   
+}
+
+.img-slider .slide .info .hr{
+   width: 500px;
+   color: #1a0942;
+   background-color: #1a0942;
+   height: 4px;
+   border-width: 2px;
+   align-items: center;
 }
 
 .img-slider .slide .info p{
-   color: #fff;
-   background: rgba(0, 0, 0, 0.1);
-   font-size: 16px;
-   width: 60px;
-   padding: 10px;
-   border-radius: 4px;
+   color: #2f1272;
+   font-size: 35px;
+   font-weight: bolder;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   width: 90px;
+   padding: 25px;
+}
 
+...mission, .vision, .motto {
+   color: white;
+   font-size: 20px;
+   padding: 10px;
+}
+
+..mission {
+   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .img-slider .navigation{
@@ -257,3 +266,37 @@
    border-radius: 50%;
    cursor: pointer;
 }
+.img-slider .navigation .btn .active{
+   background: coral;
+   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 380px){
+   .img-slider{
+      width: 250px;
+      height: 150px;
+   }
+   .img-slider .slide .info{
+      padding: 5px 10px;
+      
+   }
+   .img-slider .slide .info  h2{
+      font-size: 10px;
+      width: 40%;
+   }
+   .img-slider .slide .info p{
+      width: 50%;
+      font-size: 8px;
+   }
+   .img-slider .navigation{
+      bottom: 10px;
+   }
+   .img-slider .navigation .btn{
+      width: 5px;
+      height: 5px;
+      margin: 6px;
+
+   }
+   
+}
+

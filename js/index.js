@@ -1,50 +1,73 @@
-var slides = document.querySelectorAll('.slide');
-var btns = document.querySelectorAll('.btn');
-let currentSlide = 1;
+const slideContainer = document.querySelector('.container');
+const slide = document.querySelector('.slides');
+const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');
+const interval = 5000;
 
+let slides = document.querySelectorAll('.slide');
+let index = 1;
+let slideId;
 
-var manualNav = function(manual){
-  slides.forEach((slide) => {
-    slide.classList.remove('active');
+const firstClone = slides[0].cloneNode(true);
+const lastClone = slides[slides.length - 1].cloneNode(true);
 
-    btns.forEach((btn) => {
-      btn.classList.remove('active');
-    });
-  });
+firstClone.id = 'first-Clone';
+lastClone.id = 'last-Clone';
 
+slide.append(firstClone);
+slide.prepend(lastClone);
 
-  slides[manual].classList.add('active');
-  btns[manual].classList.add('active');
-}
+const slideWidth = slides[index].clientWidth;
 
-btns.forEach((btn, i) => {
-  btn.addEventListener("click", () => {
-    manualNav(i);
-    currentSlide = i;
-  });
+slide.style.transform = 'translatex(${-slideWidth * index}px)';
+
+console.log(slides);
+
+const startSlide = () => {
+  slideId = setInterval(() => {
+    moveToNextSlide();
+  }, interval);
+};
+
+const getSlides = () => document.querySelectorAll('.slide');
+
+slide.addEventListener('transitionend', ()=>{
+    slides = getSlides();
+  if (slides[index].id === firstClone.id) {
+    slide.style.transition = 'none';
+    index = 1;
+    slide.style.transform = `translateX(${ -slideWidth * index }px)`;
+  }
+  if (slides[index].id === lastClone.id) {
+    slide.style.transition = 'none';
+    index = slides.length - 2;
+    slide.style.transform = `translateX(${ -slideWidth * index }px)`;
+  }
 });
 
-var repeat = function(activeClass){
-   let active=document.getElementsByClassName('active');
-   let i = 1;
-
-   var repeater = () => {
-      setTimeout(function(){
-
-         slides[i].classList.add('active');
-         btns[i].classList.add('active');
-         i++;
-
-         if(slides.length == i){
-            i = 0;
-         }
-         if(i >= slides.length){
-            return;
-         }
-         repeater();
-      }, 10000);
-   }
-   repeater();
+const moveToNextSlide = () =>{
+  slides = getSlides();
+  if(index >= slides.length -1) return;
+  index++;
+    slide.style.transform = `translateX(${ -slideWidth * index }px)`;
+    slide.style.transition = '.7s';
 }
-repeat();
 
+const moveToPreviousSlide = () => {
+  if(index <= 0) return;
+  index--;
+    slide.style.transform = `translateX(${ -slideWidth * index }px)`;
+    slide.style.transition = '1.7s';
+}
+
+slideContainer.addEventListener('mouseenter', () => {
+  
+  clearInterval(slideId);
+});
+slideContainer.addEventListener('mouseleave', startSlide);
+
+nextBtn.addEventListener('click', moveToNextSlide);
+
+prevBtn.addEventListener('click', moveToPreviousSlide);
+
+startSlide();

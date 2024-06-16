@@ -68,14 +68,14 @@
 }
 .webName {
    display: inline-block;
-   width: 440px;
+   width: 460px;
    vertical-align: top;
    margin-top: 15px;
    text-decoration: none;
    font-weight: bold;
-   font-size: 24px;
+   font-size: 28px;
    font-family: sans-serif;
-   
+   font-variant-caps: all-petite-caps
 }
 .webName a{
    text-decoration: none;
@@ -111,23 +111,22 @@
 .menu{
    text-align: right;
    display: block;
-   ax-width: 80%;
-   idth: 1140px;
 }
 .menu ul{
    list-style: none;
-   display: inline-flex;  
+   display: flex;  
 }
 .menu ul li{ 
    width: 150px;
    margin: 10px;
+   z-index: 1;
 }
 .menu ul li a{
    text-decoration: none;
    font-weight: bold;
    font-size: 18px;
    font-family: sans-serif;
-   color:rgb(39, 134, 243);
+   color:rgb(42, 132, 235);
 }
 .menu ul li a:hover{
    color: rgb(39, 134, 243);
@@ -159,6 +158,9 @@
    border-bottom: 3px dotted rgb(7, 119, 224);
    text-align: left;
 }
+.submenu1 ul li a{
+   color:white;
+}
 .submenu1 ul li:last-child{
    border-bottom: none;
 }
@@ -171,132 +173,143 @@
    border-radius: 8px;
    border-bottom-style: none;
 }
+.submenu2{
+   display: none;
+}
+.menu ul li:hover .submenu2{
+   display: block;
+   position: absolute;
+   background-color: transparent;
+   box-shadow: 0px 0px 10px rgb(125, 207, 200);
+   border-radius: 18px;
+   margin-top: 5px;
+}
+.submenu2 ul{
+   display: block;
+}
+.submenu2 ul li{
+   width: 207px;
+   padding: 10px;
+   border-bottom: 3px dotted rgb(7, 119, 224);
+   text-align: left;
+}
+.submenu2 ul li:last-child{
+   border-bottom: none;
+}
+.submenu2 ul li a{
+   color: white;
+}
+.submenu2 ul li a:hover {
+   width: 210px;
+   color: white;
+   font-weight: normal;
+   padding: 5px 10px;
+   background-color:rgb(7, 119, 224) ;
+   border-radius: 8px;
+   border-bottom-style: none;
+}
+.container {
+   margin: 0 auto;
+   width: 100%;
+   height: 800px;
+   position: relative;
+   overflow: hidden;
+}
+.slides{
+   display: flex;
+   height: 800px;
+}
+.slide {
+   min-height: 300px;
 
-body{
+
+   min-width: 100%;
+   position: relative;
+}
+.slide::before{
+   content: "";
+   display: block;
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   background: #000;
+   opacity:0.4;
    
 }
-
-.img-slider {
-   position: relative; 
-   width: 99%;
-   height: 1000px;
-   margin: 10px;
-   background: #eeeef0;
+.slide img {
+   width: 100%;
+   height: 100%;
+  
 }
 
-.img-slider .slide{
-   z-index: 1;
+.slide-caption{
    position: absolute;
    width: 100%;
-   clip-path: circle(0% at 0 50%);
+   top: 300px;
 }
-
-.img-slider .slide .active{
-   clip-path: circle(150% at 0 50%);
-   transition: 3s;
-   transition-property: clip-patch;
+.slide-caption h1{
+   transform: translateY(-50%);
+   font-size: 55px;
+   color: white;
+   text-align: center;
+   text-transform: capitalize;
+   padding: 10px;
 }
-
-.img-slider .slide img{
-   z-index: 1;
-   width: 100%;
-   border-radius: 5px;
-}
-
-.img-slider .slide .info{
-   position: absolute;
-   top: 35%;
-   padding: 15px 30px;
+.slide-caption p {   
+   transform: translateX(-50%);
+   font-size: 25px;
+   color: white;
    text-align: center;
    
 }
-
-.img-slider .slide .info h2{
-   color:#fff;
-   font-size: 60px;
-   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   text-transform: capitalize;
-   font-weight: bolder;
-   letter-spacing: 3px;
-   
-}
-
-.img-slider .slide .info .hr{
-   width: 500px;
-   color: #1a0942;
-   background-color: #1a0942;
-   height: 4px;
-   border-width: 2px;
+.slide-controls {
+   position: absolute;
+   bottom: 10px;
+   left: 0;
+   transform: translateY(-50%);
+   width: 100%;
+   display: inline-flex;
+   justify-content:space-between;
    align-items: center;
 }
-
-.img-slider .slide .info p{
-   color: #2f1272;
-   font-size: 35px;
-   font-weight: bolder;
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   width: 90px;
-   padding: 25px;
-}
-
-...mission, .vision, .motto {
-   color: white;
-   font-size: 20px;
-   padding: 10px;
-}
-
-..mission {
-   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.img-slider .navigation{
-   z-index: 2;
-   position: absolute;
-   display: flex;
-   bottom: 30px;
-   left: 50%;
-   transform: translateX(-50%);
-}
-
-.img-slider .navigation .btn{
-   background: rgba(255, 255, 255, 0.5);
-   width: 12px;
-   height: 12px;
-   margin: 10px;
-   border-radius: 50%;
+#next-btn, #prev-btn {
    cursor: pointer;
+   background: transparent;
+   font-size: 30px;
+   font-weight: bolder;
+   border: none;
+   padding: 10px;
+   color: rgb(20, 105, 233);
 }
-.img-slider .navigation .btn .active{
-   background: coral;
-   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+#next-btn:focus,#prev-btn:focus{
+   outline: red;
 }
-
-@media (max-width: 380px){
-   .img-slider{
-      width: 250px;
-      height: 150px;
-   }
-   .img-slider .slide .info{
-      padding: 5px 10px;
-      
-   }
-   .img-slider .slide .info  h2{
-      font-size: 10px;
-      width: 40%;
-   }
-   .img-slider .slide .info p{
-      width: 50%;
-      font-size: 8px;
-   }
-   .img-slider .navigation{
-      bottom: 10px;
-   }
-   .img-slider .navigation .btn{
-      width: 5px;
-      height: 5px;
-      margin: 6px;
-
-   }
-   
+.services {
+   display: block;
 }
-
+.services h1{
+   text-align: center;
+   padding: 15px;
+}
+.service-box{
+   display: flex;
+}
+.surgical-service{
+   display: inline-block;
+   width: 25%;
+   padding: 20px 20px;
+   text-align: center;
+}
+.surgical-service img {
+   padding: 15px;
+}
+.surgical-service h3{
+   font-size: 24px;
+   padding: 15px;
+}
+.surgical-service p{
+   font-size: 18px;
+   padding: 20px;
+}
